@@ -605,6 +605,23 @@ spec:
             key: password
   restartPolicy: Never
 ```
+On peut utiliser directement un secret existant dans un Pod. 
+Voici un exemple de pod qui utilise un secret nommé db-user-pass (secret crée plus haut précédement) : 
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mypod
+spec:
+  containers:
+  - name: mypod
+    image: redis
+    envFrom:
+      - secretRef:
+          name: db-user-pass
+  restartPolicy: Never
+```
 
 ### Consommation de valeurs secrètes à partir de variables d'environnement
 
